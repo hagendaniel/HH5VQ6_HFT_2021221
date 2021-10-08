@@ -6,10 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Backend\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\HH5VQ6_HFT_2021221 Logic\HH5VQ6_HFT_2021221 Logic.csproj" />
     <ProjectReference Include="..\HH5VQ6_HFT_2021221 Models\HH5VQ6_HFT_2021221 Models.csproj" />
     <ProjectReference Include="..\HH5VQ6_HFT_2021221 Repository\HH5VQ6_HFT_2021221 Repository.csproj" />
