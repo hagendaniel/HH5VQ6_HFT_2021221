@@ -1,0 +1,35 @@
+﻿using HH5VQ6_HFT_2021221.Data;
+using HH5VQ6_HFT_2021221.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace HH5VQ6_HFT_2021221.Repository
+{
+    public class MapRepository : Repository<Map>, IMapRepository
+    {
+        public MapRepository(GameDbContext gameDbContext) : base(gameDbContext)
+        {
+
+        }
+        public void addMap(string mapName, int difficulty)
+        {
+            gameDbContext.Maps.Add(new Map() { MapName = mapName, Difficulty = difficulty });
+            gameDbContext.SaveChanges();
+        }
+
+        public void renameMap(int id, string newName)
+        {
+            var map = GetOne(id);
+            map.MapName = newName;
+            gameDbContext.SaveChanges();
+        }
+
+        public override Map GetOne(int id)
+        {
+            return GetAll().SingleOrDefault(x => x.MapId == id);
+        }
+    }
+}
