@@ -23,11 +23,12 @@ namespace HH5VQ6_HFT_2021221.Models
 
         [NotMapped]
         public virtual Place Place { get; set; }
+        [NotMapped]
         public virtual ICollection<Player> Players { get; set; }
 
-        public Season()
+        /*public Season()
         {
             Players = new HashSet<Player>();
-        }
+        }*/
     }
 }

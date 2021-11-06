@@ -13,20 +13,20 @@ namespace HH5VQ6_HFT_2021221.Data
         //Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\SquidGame.mdf;Integrated Security=True
 
         //Creating/Define Tables
-        public virtual DbSet<Map> Maps { get; set; }
-        public virtual DbSet<Place> Place { get; set; }
-        public virtual DbSet<Player> Players { get; set; }
-        public virtual DbSet<Season> Seasons { get; set; }
+        public /*virtual*/ DbSet<Map> Maps { get; set; }
+        public /*virtual*/ DbSet<Place> Place { get; set; }
+        public /*virtual*/ DbSet<Player> Players { get; set; }
+        public /*virtual*/ DbSet<Season> Seasons { get; set; }
 
         public GameDbContext()
         {
             this.Database.EnsureCreated();
         }
 
-        public GameDbContext(DbContextOptions<GameDbContext> options) : base(options)
+        /*public GameDbContext(DbContextOptions<GameDbContext> options) : base(options)
         {
 
-        }
+        }*/
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

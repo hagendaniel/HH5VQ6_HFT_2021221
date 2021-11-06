@@ -18,11 +18,12 @@ namespace HH5VQ6_HFT_2021221.Models
         [MaxLength(50)]
         public string PlaceName { get; set; }
         public string Country { get; set; }
+        [NotMapped]
         public virtual ICollection<Season> Seasons { get; set; }
 
-        public Place()
+        /*public Place()
         {
             Seasons = new HashSet<Season>();
-        }
+        }*/
     }
 }

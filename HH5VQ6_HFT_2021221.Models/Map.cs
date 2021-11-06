@@ -18,11 +18,13 @@ namespace HH5VQ6_HFT_2021221.Models
         [Required]
         public string MapName { get; set; }
         public int Difficulty { get; set; }
+
+        [NotMapped]
         public virtual ICollection<Player> Players { get; set; }
 
-        public Map()
+        /*public Map()
         {
             Players = new HashSet<Player>();
-        }
+        }*/
     }
 }
