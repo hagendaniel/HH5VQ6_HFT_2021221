@@ -20,6 +20,12 @@ namespace HH5VQ6_HFT_2021221.Repository
             gameDbContext.SaveChanges();
         }
 
+        public void removePlace(int id)
+        {
+            gameDbContext.Places.Remove(GetOne(id));
+            gameDbContext.SaveChanges();
+        }
+
         public void changePlace(int id, string newPlace)
         {
             var place = GetOne(id);

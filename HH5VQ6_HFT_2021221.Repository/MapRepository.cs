@@ -20,6 +20,12 @@ namespace HH5VQ6_HFT_2021221.Repository
             gameDbContext.SaveChanges();
         }
 
+        public void removeMap(int id)
+        {
+            gameDbContext.Maps.Remove(GetOne(id));
+            gameDbContext.SaveChanges();
+        }
+
         public void renameMap(int id, string newName)
         {
             var map = GetOne(id);

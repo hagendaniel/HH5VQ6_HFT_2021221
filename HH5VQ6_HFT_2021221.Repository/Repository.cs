@@ -29,7 +29,7 @@ namespace HH5VQ6_HFT_2021221.Repository
             gameDbContext.SaveChanges();
         }
 
-        public void Delete(T entity)
+        public void Remove(T entity)
         {
             gameDbContext.Set<T>().Remove(entity);
             gameDbContext.SaveChanges();

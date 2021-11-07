@@ -20,6 +20,12 @@ namespace HH5VQ6_HFT_2021221.Repository
             gameDbContext.SaveChanges();
         }
 
+        public void removeSeason(int id)
+        {
+            gameDbContext.Seasons.Remove(GetOne(id));
+            gameDbContext.SaveChanges();
+        }
+
         public void changeName(int id, string newName)
         {
             var season = GetOne(id);

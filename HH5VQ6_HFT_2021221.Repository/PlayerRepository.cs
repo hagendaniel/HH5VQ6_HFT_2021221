@@ -35,6 +35,12 @@ namespace HH5VQ6_HFT_2021221.Repository
             gameDbContext.SaveChanges();
         }
 
+        public void removePlayer(int id)
+        {
+            gameDbContext.Players.Remove(GetOne(id));
+            gameDbContext.SaveChanges();
+        }
+
         public override Player GetOne(int id)
         {
             return GetAll().SingleOrDefault(x => x.PlayerId == id);
