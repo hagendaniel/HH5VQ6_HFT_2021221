@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HH5VQ6_HFT_2021221.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,10 @@ namespace HH5VQ6_HFT_2021221.Logic
 {
     public interface IPlaceLogic
     {
+        Place getPlaceById(int id);
+        void addPlace(string placeName, string country);
+        void removePlace(int id);
+        void changePlace(int id, string newPlace);
+        IList<Place> getAllPlaces();
     }
 }
