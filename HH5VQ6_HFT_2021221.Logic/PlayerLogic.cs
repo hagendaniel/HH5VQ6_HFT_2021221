@@ -11,10 +11,12 @@ namespace HH5VQ6_HFT_2021221.Logic
     public class PlayerLogic : IPlayerLogic
     {
         IPlayerRepository playerRepository;
+        ISeasonRepository seasonRepository;
 
-        public PlayerLogic(IPlayerRepository repository)
+        public PlayerLogic(IPlayerRepository repository, ISeasonRepository _seasonRepository)
         {
             this.playerRepository = repository;
+            seasonRepository = _seasonRepository;
         }
 
         public void changeStatus(int id, bool newStatus, string eliminatedOnMap)
@@ -45,6 +47,16 @@ namespace HH5VQ6_HFT_2021221.Logic
         public void removePlayer(int id)
         {
             playerRepository.removePlayer(id);
+        }
+
+        //non-crud
+
+        public Player whoWonGivenSeason(int seasonId)
+        {
+            Season season = seasonRepository.GetAll().Where(x => x.SeasonId == seasonId).SingleOrDefault();
+            Player toReturn = season.Players.Where(x => x.AliveOrDead == true).SingleOrDefault();
+            //var player = seasonRepository.GetAll().Where(x => x.SeasonId==seasonId).Where(x => x.Players.Any(x => x.AliveOrDead==true)).FirstOrDefault();
+            return toReturn;
         }
     }
 }
