@@ -42,6 +42,13 @@ namespace HH5VQ6_HFT_2021221.Test
         //    Assert.That(mapLogic.getAllMaps().Count() > 0);
         //}
 
+        [Test]
+        public void whichSeasonGaame()
+        {
+            SeasonLogic seasonLogic = new SeasonLogic(seasonRepository, placeRepository);
+            Assert.That(() => seasonLogic.whichSeasonGame("Buda"), Is.EqualTo("Medieval Knockout"));
+        }
+
         [TestCase(1)]
         public void WhoWonGivenSeason(int seasonId)
         {
@@ -207,8 +214,9 @@ namespace HH5VQ6_HFT_2021221.Test
             contextMock.Setup(mock => mock.Set<Season>()).Returns(seasonDbSetMock.Object);
 
             mapLogic = new MapLogic(mapRepository);
-            seasonLogic = new SeasonLogic(seasonRepository);
+            seasonLogic = new SeasonLogic(seasonRepository, placeRepository);
             playerLogic = new PlayerLogic(playerRepository, seasonRepository);
+            placeLogic = new PlaceLogic(placeRepository);
         }
     }
 }
