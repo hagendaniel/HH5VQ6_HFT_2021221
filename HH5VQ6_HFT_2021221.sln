@@ -23,9 +23,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Others", "Others", "{0A9678
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Frontend", "Frontend", "{8C5CCB5A-06B2-40F4-BA3E-C1F8ED57198F}"
-	ProjectSection(SolutionItems) = preProject
-		HH5VQ6_HFT_2021221.Test\LogicTests.cs = HH5VQ6_HFT_2021221.Test\LogicTests.cs
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Backend", "Backend", "{B3276C52-E4BA-4959-87E1-1498652194B4}"
 EndProject
