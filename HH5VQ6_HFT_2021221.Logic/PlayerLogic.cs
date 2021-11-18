@@ -54,12 +54,17 @@ namespace HH5VQ6_HFT_2021221.Logic
         public Player whoWonGivenSeason(int seasonId)
         {
             IQueryable<Season> seasons = seasonRepository.GetAll();
-            ICollection<Player> players = playerRepository.GetAll().ToList();
+            ICollection<Player> players = playerRepository.GetAll().Where(x => x.SeasonId == seasonId).ToList();
             Season season = seasons.Where(x => x.SeasonId==seasonId).FirstOrDefault();
             season.Players = players;
 
-            Player toReturn = season.Players.Where(x => x.AliveOrDead == true).First();
-            return toReturn;
+            if (season.Players.Count(x => x.AliveOrDead == true) > 1)
+                throw new SeasonNotFinishedException();
+            else
+            {
+                Player toReturn = season.Players.Where(x => x.AliveOrDead == true).First();
+                return toReturn;
+            }
         }
     }
 }

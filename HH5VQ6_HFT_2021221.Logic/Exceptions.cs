@@ -16,4 +16,16 @@ namespace HH5VQ6_HFT_2021221.Logic
         {
         }
     }
+
+    class SeasonNotFinishedException : Exception
+    {
+        public SeasonNotFinishedException()
+        {
+
+        }
+
+        public SeasonNotFinishedException(string message) : base(message)
+        {
+        }
+    }
 }
