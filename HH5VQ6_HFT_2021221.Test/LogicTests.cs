@@ -42,18 +42,26 @@ namespace HH5VQ6_HFT_2021221.Test
         //    Assert.That(mapLogic.getAllMaps().Count() > 0);
         //}
 
+        [TestCase(2020)]
+        public void WhoWonGivenSeason(int seasonId)
+        {
+            PlayerLogic logic = new PlayerLogic(playerRepository, seasonRepository);
+            Assert.That(() => logic.whoWonGivenSeason(seasonId).PlayerId, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void AddMapTest()
+        {
+            //Map toAdd = new Map { MapId = 5, MapName = "Trainsurfing through Hungary", Difficulty = 5 };
+            mapLogic.addMap("Trainsurfing through Hungary", 5);
+            Assert.That(() => mapLogic.getMapById(5).MapName== "Trainsurfing through Hungary");
+        }
+
         [Test]
         public void GetMapByIdTest()
         {
             var got = mapLogic.getMapById(1);
             Assert.That(got.MapName==("Red Light Green Light"));
-        }
-
-        [TestCase(2020)]
-        public void WhoWonGivenSeason(int seasonId)
-        {
-            PlayerLogic logic = new PlayerLogic(playerRepository, seasonRepository);
-            Assert.That(() => logic.whoWonGivenSeason(seasonId).PlayerId, Is.EqualTo(1));            
         }
 
         [SetUp]
