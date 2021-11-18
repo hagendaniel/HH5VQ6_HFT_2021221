@@ -45,6 +45,7 @@ namespace HH5VQ6_HFT_2021221.Logic
             seasonRepository.removeSeason(id);
         }
 
+        //non-crud
         public string whichSeasonGame(string placeName) //In which season was the game hold in the given city first
         {
             ICollection<Season> seasons = seasonRepository.GetAll().ToList();
