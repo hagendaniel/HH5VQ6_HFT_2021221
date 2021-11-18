@@ -20,7 +20,8 @@ namespace HH5VQ6_HFT_2021221.Data
 
         public GameDbContext()
         {
-            this.Database.EnsureCreated();
+            //this.Database.EnsureCreated();
+            Database?.EnsureCreated();
         }
 
         /*public GameDbContext(DbContextOptions<GameDbContext> options) : base(options)
