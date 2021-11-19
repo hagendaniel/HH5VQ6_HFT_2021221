@@ -28,4 +28,27 @@ namespace HH5VQ6_HFT_2021221.Logic
         {
         }
     }
+
+    class PlayerAlreadyDeadException : Exception
+    {
+        public PlayerAlreadyDeadException()
+        {
+
+        }
+
+        public PlayerAlreadyDeadException(string message) : base(message)
+        {
+        }
+    }
+    class PlayerDoesNotExistException : Exception
+    {
+        public PlayerDoesNotExistException()
+        {
+
+        }
+
+        public PlayerDoesNotExistException(string message) : base(message)
+        {
+        }
+    }
 }

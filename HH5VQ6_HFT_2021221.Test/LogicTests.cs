@@ -42,6 +42,15 @@ namespace HH5VQ6_HFT_2021221.Test
         //    Assert.That(mapLogic.getAllMaps().Count() > 0);
         //}
 
+        //non-crud tests
+
+        [Test]
+        public void WhichSeasonWonByGivenPlayer()
+        {
+            SeasonLogic seasonLogic = new SeasonLogic(seasonRepository, placeRepository, playerRepository);
+            Assert.That(() => seasonLogic.whichSeasonWonByGivenPlayer(1), Is.EqualTo("Personal Bankruptcy"));
+        }
+
         [Test]
         public void TheKillerMap()
         {
@@ -52,7 +61,7 @@ namespace HH5VQ6_HFT_2021221.Test
         [Test]
         public void whichSeasonGame()
         {
-            SeasonLogic seasonLogic = new SeasonLogic(seasonRepository, placeRepository);
+            SeasonLogic seasonLogic = new SeasonLogic(seasonRepository, placeRepository, playerRepository);
             Assert.That(() => seasonLogic.whichSeasonGame("Buda"), Is.EqualTo("Medieval Knockout"));
         }
 
@@ -70,6 +79,8 @@ namespace HH5VQ6_HFT_2021221.Test
             mapLogic.addMap("Trainsurfing through Hungary", 5);
             Assert.That(() => mapLogic.getMapById(5).MapName== "Trainsurfing through Hungary");
         }*/
+
+        //Some crud-tests
 
         [Test]
         public void GetSeasonByIdTest()
@@ -229,7 +240,7 @@ namespace HH5VQ6_HFT_2021221.Test
             contextMock.Setup(mock => mock.Set<Season>()).Returns(seasonDbSetMock.Object);
 
             mapLogic = new MapLogic(mapRepository, playerRepository, seasonRepository);
-            seasonLogic = new SeasonLogic(seasonRepository, placeRepository);
+            seasonLogic = new SeasonLogic(seasonRepository, placeRepository, playerRepository);
             playerLogic = new PlayerLogic(playerRepository, seasonRepository);
             placeLogic = new PlaceLogic(placeRepository);
         }

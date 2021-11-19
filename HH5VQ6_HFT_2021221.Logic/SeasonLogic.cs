@@ -13,11 +13,13 @@ namespace HH5VQ6_HFT_2021221.Logic
     {
         ISeasonRepository seasonRepository;
         IPlaceRepository placeRepository;
+        IPlayerRepository playerRepository;
 
-        public SeasonLogic(ISeasonRepository repository, IPlaceRepository _placeRepository)
+        public SeasonLogic(ISeasonRepository repository, IPlaceRepository _placeRepository, IPlayerRepository _playerRepository)
         {
             this.seasonRepository = repository;
             placeRepository = _placeRepository;
+            playerRepository = _playerRepository;
         }
 
         public void changeName(int id, string newName)
@@ -61,6 +63,25 @@ namespace HH5VQ6_HFT_2021221.Logic
                 throw new InvalidPlaceException();
             else
                 return toReturn;
+        }
+
+        public string whichSeasonWonByGivenPlayer(int playerId)
+        {
+            Player player = playerRepository.GetOne(playerId);
+            if (player.EliminatedOnMap_MapId != null)
+            {
+                throw new PlayerAlreadyDeadException();
+            }
+            else if (player is null)
+            {
+                throw new PlayerDoesNotExistException();
+            }
+            else
+            {
+                IQueryable<Season> seasons = seasonRepository.GetAll();
+                string toReturn = seasons.Where(x => x.SeasonId == player.SeasonId).Select(x => x.SeasonNickname).FirstOrDefault();
+                return toReturn;
+            }
         }
     }
 }
