@@ -43,7 +43,14 @@ namespace HH5VQ6_HFT_2021221.Test
         //}
 
         [Test]
-        public void whichSeasonGaame()
+        public void TheKillerMap()
+        {
+            MapLogic mapLogic = new MapLogic(mapRepository, playerRepository, seasonRepository);
+            Assert.That(() => mapLogic.TheKillerMap("Personal Bankruptcy"), Is.EqualTo("Tud-of-War"));
+        }
+
+        [Test]
+        public void whichSeasonGame()
         {
             SeasonLogic seasonLogic = new SeasonLogic(seasonRepository, placeRepository);
             Assert.That(() => seasonLogic.whichSeasonGame("Buda"), Is.EqualTo("Medieval Knockout"));
@@ -112,7 +119,15 @@ namespace HH5VQ6_HFT_2021221.Test
                     new Player() { PlayerId = 2, PlayerName = "Zsolszesz Fodi", Born = Convert.ToDateTime("2000.12.24."), Debt = 9000, Age = 21, AliveOrDead = false, SeasonId = 1 },
                     new Player() { PlayerId = 3, PlayerName = "Benedek James", Born = Convert.ToDateTime("2000.03.31."), Debt = 20000, Age = 21, AliveOrDead = false, EliminatedOnMap_MapId = 1, SeasonId = 1 },
                     new Player() { PlayerId = 4, PlayerName = "Ricsi 00", Born = Convert.ToDateTime("2000.09.17."), Debt = 20000, Age = 21, AliveOrDead = false, SeasonId = 1 },
-                    new Player() { PlayerId = 5, PlayerName = "Cirno Fumo", Born = Convert.ToDateTime("2000.08.20."), Debt = 20000, Age = 21, AliveOrDead = false, EliminatedOnMap_MapId = 3, SeasonId = 1 }
+                    new Player() { PlayerId = 5, PlayerName = "Cirno Fumo", Born = Convert.ToDateTime("2000.08.20."), Debt = 20000, Age = 21, AliveOrDead = false, EliminatedOnMap_MapId = 3, SeasonId = 1 },
+                    new Player() { PlayerId = 6, PlayerName = "Gyurma", Born = Convert.ToDateTime("2000.08.21."), Debt = 20001, Age = 22, AliveOrDead = false, EliminatedOnMap_MapId = 3, SeasonId = 1 },
+                    new Player() { PlayerId = 7, PlayerName = "Cirno Fumo", Born = Convert.ToDateTime("2000.08.20."), Debt = 20000, Age = 21, AliveOrDead = false, EliminatedOnMap_MapId = 3, SeasonId = 1 },
+                    new Player() { PlayerId = 8, PlayerName = "Gyurma", Born = Convert.ToDateTime("2000.08.21."), Debt = 20001, Age = 22, AliveOrDead = false, EliminatedOnMap_MapId = 3, SeasonId = 1 }/*,
+                    new Player() { PlayerId = 9, PlayerName = "Gyurma", Born = Convert.ToDateTime("2000.08.21."), Debt = 20001, Age = 22, AliveOrDead = false, EliminatedOnMap_MapId = 2, SeasonId = 1 },
+                    new Player() { PlayerId = 10, PlayerName = "Gyurma", Born = Convert.ToDateTime("2000.08.21."), Debt = 20001, Age = 22, AliveOrDead = false, EliminatedOnMap_MapId = 2, SeasonId = 1 },
+                    new Player() { PlayerId = 11, PlayerName = "Gyurma", Born = Convert.ToDateTime("2000.08.21."), Debt = 20001, Age = 22, AliveOrDead = false, EliminatedOnMap_MapId = 2, SeasonId = 1 },
+                    new Player() { PlayerId = 12, PlayerName = "Gyurma", Born = Convert.ToDateTime("2000.08.21."), Debt = 20001, Age = 22, AliveOrDead = false, EliminatedOnMap_MapId = 2, SeasonId = 1 },
+                    new Player() { PlayerId = 13, PlayerName = "Gyurma", Born = Convert.ToDateTime("2000.08.21."), Debt = 20001, Age = 22, AliveOrDead = false, EliminatedOnMap_MapId = 2, SeasonId = 1 }*/
                 };
             List<Season> seasonData =
                 new List<Season>
@@ -213,7 +228,7 @@ namespace HH5VQ6_HFT_2021221.Test
             contextMock.Setup(mock => mock.Set<Player>()).Returns(playerDbSetMock.Object);
             contextMock.Setup(mock => mock.Set<Season>()).Returns(seasonDbSetMock.Object);
 
-            mapLogic = new MapLogic(mapRepository);
+            mapLogic = new MapLogic(mapRepository, playerRepository, seasonRepository);
             seasonLogic = new SeasonLogic(seasonRepository, placeRepository);
             playerLogic = new PlayerLogic(playerRepository, seasonRepository);
             placeLogic = new PlaceLogic(placeRepository);

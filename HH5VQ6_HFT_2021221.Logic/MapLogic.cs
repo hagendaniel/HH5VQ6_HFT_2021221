@@ -11,10 +11,14 @@ namespace HH5VQ6_HFT_2021221.Logic
     public class MapLogic : IMapLogic
     {
         IMapRepository mapRepository;
+        IPlayerRepository playerRepository;
+        ISeasonRepository seasonRepository;
 
-        public MapLogic(IMapRepository repository) //dependency injection
+        public MapLogic(IMapRepository repository, IPlayerRepository _playerRepository, ISeasonRepository _seasonRepository) //dependency injection
         {
             this.mapRepository = repository;
+            playerRepository = _playerRepository;
+            seasonRepository = _seasonRepository;
         }
         public void addMap(string mapName, int difficulty)
         {
@@ -40,6 +44,23 @@ namespace HH5VQ6_HFT_2021221.Logic
         {
             mapRepository.renameMap(id, newName);
             //should add delete to the maprepository - a repot ez nem éri el, csak a maprepot
+        }
+
+        //non-crud
+        public string TheKillerMap(string seasonName) //Which map killed most of the players in the given season
+        {
+            IQueryable<Season> seasons = seasonRepository.GetAll();
+            //IQueryable<Map> maps = mapRepository.GetAll();
+            Season season = seasons.Where(x => x.SeasonNickname == seasonName).FirstOrDefault();
+            ICollection<Player> players = playerRepository.GetAll().Where(x => x.SeasonId == season.SeasonId).ToList();
+            season.Players = players;
+
+            var groupByElimination = players.GroupBy(x => x.EliminatedOnMap_MapId);
+            var most = groupByElimination.OrderByDescending(x => x.Count()).Select(x => x.Key).First();//.Select(x => x.EliminatedOnMap_MapId);
+            //var mostPlayersKilledHereMapId = players.GroupBy(p => p.EliminatedOnMap_MapId).OrderByDescending(x => x.Count()).First();
+            Map toReturn = mapRepository.GetOne(Convert.ToInt32(most));
+
+            return toReturn.MapName;
         }
     }
 }
