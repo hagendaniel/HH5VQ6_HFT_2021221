@@ -45,10 +45,19 @@ namespace HH5VQ6_HFT_2021221.Test
         //non-crud tests
 
         [Test]
+        public void inWhichCityPlayerDied()
+        {
+            PlaceLogic placeLogic = new PlaceLogic(placeRepository, playerRepository, seasonRepository);
+            Assert.That(() => placeLogic.inWhichCityPlayerDied(3), Is.EqualTo("Choi"));
+            Assert.That(() => placeLogic.inWhichCityPlayerDied(1), Throws.Exception);
+        }
+
+        [Test]
         public void WhichSeasonWonByGivenPlayer()
         {
             SeasonLogic seasonLogic = new SeasonLogic(seasonRepository, placeRepository, playerRepository);
             Assert.That(() => seasonLogic.whichSeasonWonByGivenPlayer(1), Is.EqualTo("Personal Bankruptcy"));
+            Assert.That(() => seasonLogic.whichSeasonWonByGivenPlayer(218), Throws.Exception);
         }
 
         [Test]
@@ -242,7 +251,7 @@ namespace HH5VQ6_HFT_2021221.Test
             mapLogic = new MapLogic(mapRepository, playerRepository, seasonRepository);
             seasonLogic = new SeasonLogic(seasonRepository, placeRepository, playerRepository);
             playerLogic = new PlayerLogic(playerRepository, seasonRepository);
-            placeLogic = new PlaceLogic(placeRepository);
+            placeLogic = new PlaceLogic(placeRepository, playerRepository, seasonRepository);
         }
     }
 }

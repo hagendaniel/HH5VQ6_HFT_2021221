@@ -51,4 +51,15 @@ namespace HH5VQ6_HFT_2021221.Logic
         {
         }
     }
+    class PlayerNotDeadException : Exception
+    {
+        public PlayerNotDeadException()
+        {
+
+        }
+
+        public PlayerNotDeadException(string message) : base(message)
+        {
+        }
+    }
 }

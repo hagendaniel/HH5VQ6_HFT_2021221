@@ -11,10 +11,14 @@ namespace HH5VQ6_HFT_2021221.Logic
     public class PlaceLogic : IPlaceLogic
     {
         IPlaceRepository placeRepository;
+        IPlayerRepository playerRepository;
+        ISeasonRepository seasonRepository;
 
-        public PlaceLogic(IPlaceRepository repository)
+        public PlaceLogic(IPlaceRepository repository, IPlayerRepository _playerRepository, ISeasonRepository _seasonRepository)
         {
             this.placeRepository = repository;
+            playerRepository = _playerRepository;
+            seasonRepository = _seasonRepository;
         }
 
         public void addPlace(string placeName, string country)
@@ -40,6 +44,31 @@ namespace HH5VQ6_HFT_2021221.Logic
         public void removePlace(int id)
         {
             placeRepository.removePlace(id);
+        }
+
+        //non-crud
+
+        public string inWhichCityPlayerDied(int playerId)
+        {
+            Player player = playerRepository.GetOne(playerId);
+            if (player.EliminatedOnMap_MapId == null)
+            {
+                throw new PlayerNotDeadException();
+            }
+            else if (player is null)
+            {
+                throw new PlayerDoesNotExistException();
+            }
+            else
+            {
+                IQueryable<Season> seasons = seasonRepository.GetAll();
+                IQueryable<Place> places = placeRepository.GetAll();
+                ICollection<Player> players = playerRepository.GetAll().ToList();
+
+                Season season = seasons.Where(x => x.SeasonId == player.SeasonId).FirstOrDefault();
+                string toReturnCountry = places.Where(x => x.PlaceId == season.PlaceId).Select(x => x.PlaceName).FirstOrDefault();
+                return toReturnCountry;
+            }
         }
     }
 }
