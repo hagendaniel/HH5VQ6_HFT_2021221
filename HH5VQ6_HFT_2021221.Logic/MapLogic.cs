@@ -20,9 +20,9 @@ namespace HH5VQ6_HFT_2021221.Logic
             playerRepository = _playerRepository;
             seasonRepository = _seasonRepository;
         }
-        public void addMap(string mapName, int difficulty)
+        public void addMap(/*string mapName, int difficulty*/Map map)
         {
-            mapRepository.addMap(mapName, difficulty);
+            mapRepository.addMap(/*mapName, difficulty*/map);
         }
 
         public void deleteMap(int id)

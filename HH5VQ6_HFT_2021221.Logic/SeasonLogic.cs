@@ -37,9 +37,9 @@ namespace HH5VQ6_HFT_2021221.Logic
             return seasonRepository.GetOne(id);
         }
 
-        public void newSeason(string seasonName, int placeId)
+        public void newSeason(/*string seasonName, int placeId*/ Season season)
         {
-            seasonRepository.newSeason(seasonName, placeId);
+            seasonRepository.newSeason(/*seasonName, placeId*/season);
         }
 
         public void removeSeason(int id)

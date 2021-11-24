@@ -10,7 +10,7 @@ namespace HH5VQ6_HFT_2021221.Logic
     public interface IPlaceLogic
     {
         Place getPlaceById(int id);
-        void addPlace(string placeName, string country);
+        void addPlace(/*string placeName, string country*/Place place);
         void removePlace(int id);
         void changePlace(int id, string newPlace);
         IList<Place> getAllPlaces();

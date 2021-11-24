@@ -14,9 +14,9 @@ namespace HH5VQ6_HFT_2021221.Repository
         {
 
         }
-        public void addPlace(string placeName, string country)
+        public void addPlace(/*string placeName, string country*/Place place)
         {
-            gameDbContext.Places.Add(new Place() { PlaceName = placeName, Country = country });
+            gameDbContext.Places.Add(/*new Place() { PlaceName = placeName, Country = country }*/place);
             gameDbContext.SaveChanges();
         }
 

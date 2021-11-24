@@ -21,9 +21,9 @@ namespace HH5VQ6_HFT_2021221.Logic
             seasonRepository = _seasonRepository;
         }
 
-        public void addPlace(string placeName, string country)
+        public void addPlace(/*string placeName, string country*/ Place place)
         {
-            placeRepository.addPlace(placeName, country);
+            placeRepository.addPlace(/*placeName, country*/place);
         }
 
         public void changePlace(int id, string newPlace)

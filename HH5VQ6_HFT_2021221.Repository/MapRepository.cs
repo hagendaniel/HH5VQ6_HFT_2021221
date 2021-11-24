@@ -14,9 +14,9 @@ namespace HH5VQ6_HFT_2021221.Repository
         {
 
         }
-        public void addMap(string mapName, int difficulty)
+        public void addMap(/*string mapName, int difficulty*/Map map)
         {
-            gameDbContext.Maps.Add(new Map() { MapName = mapName, Difficulty = difficulty });
+            gameDbContext.Maps.Add(/*new Map() { MapName = mapName, Difficulty = difficulty }*/map);
             gameDbContext.SaveChanges();
         }
 

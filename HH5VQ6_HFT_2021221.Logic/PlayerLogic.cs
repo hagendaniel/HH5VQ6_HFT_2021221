@@ -39,9 +39,9 @@ namespace HH5VQ6_HFT_2021221.Logic
             return playerRepository.GetOne(id);
         }
 
-        public void registerNewPlayer(string name, DateTime dateTime, int debt)
+        public void registerNewPlayer(/*string name, DateTime dateTime, int debt*/Player player)
         {
-            playerRepository.registerNewPlayer(new Player() { PlayerName = name, Born = dateTime, Debt = debt });
+            playerRepository.registerNewPlayer(/*new Player() { PlayerName = name, Born = dateTime, Debt = debt }*/ player);
         }
 
         public void removePlayer(int id)

@@ -116,7 +116,7 @@ namespace HH5VQ6_HFT_2021221.Test
         public void AddMapTest()
         {
             //Map toAdd = new Map { MapId = 5, MapName = "Trainsurfing through Hungary", Difficulty = 5 };
-            mapLogic.addMap("Trainsurfing through Hungary", 5);
+            mapLogic.addMap(/*"Trainsurfing through Hungary", 5*/new Map() { MapId=5, MapName= "Trainsurfing through Hungary",Difficulty=5 });
             Assert.That(() => mapLogic.getMapById(5).MapName == "Trainsurfing through Hungary");
         }
 

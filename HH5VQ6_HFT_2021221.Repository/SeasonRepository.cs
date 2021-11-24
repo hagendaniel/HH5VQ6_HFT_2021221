@@ -14,9 +14,9 @@ namespace HH5VQ6_HFT_2021221.Repository
         {
 
         }
-        public void newSeason(string seasonName, int placeId)
+        public void newSeason(/*string seasonName, int placeId*/Season season)
         {
-            gameDbContext.Seasons.Add(new Season() { SeasonNickname = seasonName, PlaceId = placeId });
+            gameDbContext.Seasons.Add(/*new Season() { SeasonNickname = seasonName, PlaceId = placeId }*/season);
             gameDbContext.SaveChanges();
         }
 
