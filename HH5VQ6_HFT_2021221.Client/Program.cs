@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Linq;
+using System.Net.Http;
 //using HH5VQ6_HFT_2021221.Data; //For testing, also Data should be added in Project reference
 
 
@@ -42,6 +44,13 @@ namespace HH5VQ6_HFT_2021221.Client
             }
             */
             Console.WriteLine("Hello World!");
+        }
+
+        static void AddMap(string mapName, int difficulty)
+        {
+            HttpClient httpClient = new HttpClient();
+
+            //HttpContent httpContent = new HttpContent(JsonConvert.SerializeObject())
         }
     }
 }
