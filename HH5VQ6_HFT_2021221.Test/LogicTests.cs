@@ -81,14 +81,6 @@ namespace HH5VQ6_HFT_2021221.Test
             Assert.That(() => logic.whoWonGivenSeason(seasonId).PlayerId, Is.EqualTo(1));
         }
 
-        /*[Test]
-        public void AddMapTest()
-        {
-            //Map toAdd = new Map { MapId = 5, MapName = "Trainsurfing through Hungary", Difficulty = 5 };
-            mapLogic.addMap("Trainsurfing through Hungary", 5);
-            Assert.That(() => mapLogic.getMapById(5).MapName== "Trainsurfing through Hungary");
-        }*/
-
         //Some crud-tests
 
         [Test]
@@ -102,7 +94,30 @@ namespace HH5VQ6_HFT_2021221.Test
         public void GetMapByIdTest()
         {
             var got = mapLogic.getMapById(1);
-            Assert.That(got.MapName==("Red Light Green Light"));
+            Assert.That(got.MapName == ("Red Light Green Light"));
+        }
+
+        [Test]
+        public void ChangeSomeonesId()
+        {
+            playerLogic.customId(1, 218);
+            Assert.That(playerLogic.getPlayerById(218), Is.Not.Null);
+        }
+
+        [Test]
+        public void ChangePlace()
+        {
+            placeLogic.changePlace(2, "Pest");
+            Assert.That(placeLogic.getPlaceById(2).PlaceName == "Pest");
+        }
+
+
+        [Test]
+        public void AddMapTest()
+        {
+            //Map toAdd = new Map { MapId = 5, MapName = "Trainsurfing through Hungary", Difficulty = 5 };
+            mapLogic.addMap("Trainsurfing through Hungary", 5);
+            Assert.That(() => mapLogic.getMapById(5).MapName == "Trainsurfing through Hungary");
         }
 
         [SetUp]
