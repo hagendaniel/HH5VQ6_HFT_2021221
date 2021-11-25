@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -32,9 +33,11 @@ namespace HH5VQ6_HFT_2021221.Models
         public int SeasonId { get; set; }
 
         [NotMapped]
+        [JsonIgnore]
         public virtual Season Season { get; set; }
 
         [NotMapped]
+        [JsonIgnore]
         public virtual Map Map { get; set; }
     }
 }

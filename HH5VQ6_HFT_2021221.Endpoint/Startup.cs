@@ -38,7 +38,9 @@ namespace HH5VQ6_HFT_2021221.Endpoint
             services.AddTransient<ISeasonLogic, SeasonLogic>();
             services.AddTransient<ISeasonRepository, SeasonRepository>();
 
-            services.AddDbContext<GameDbContext>();
+            services.AddTransient<GameDbContext, GameDbContext>();
+
+            //services.AddDbContext<GameDbContext,GameDbContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,10 +55,7 @@ namespace HH5VQ6_HFT_2021221.Endpoint
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Hello World!");
-                });
+                endpoints.MapControllers();
             });
         }
     }

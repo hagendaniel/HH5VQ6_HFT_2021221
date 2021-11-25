@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -19,6 +20,7 @@ namespace HH5VQ6_HFT_2021221.Models
         public string PlaceName { get; set; }
         public string Country { get; set; }
         [NotMapped]
+        [JsonIgnore]
         public virtual ICollection<Season> Seasons { get; set; }
 
         /*public Place()

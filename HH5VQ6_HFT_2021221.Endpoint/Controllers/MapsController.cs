@@ -1,4 +1,5 @@
 ﻿using HH5VQ6_HFT_2021221.Logic;
+using HH5VQ6_HFT_2021221.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -8,10 +9,10 @@ using System.Threading.Tasks;
 namespace HH5VQ6_HFT_2021221.Endpoint.Controllers
 {
     [ApiController]
-    [Route("Maps")]
+    [Route("[controller]")]
     public class MapsController : ControllerBase
     {
-        private readonly IMapLogic _mapLogic;
+        /*private readonly*/ IMapLogic _mapLogic;
 
         public MapsController(IMapLogic mapLogic)
         {
@@ -19,19 +20,43 @@ namespace HH5VQ6_HFT_2021221.Endpoint.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetMaps()
+        public IEnumerable<Map> GetMaps()
         {
             var maps = _mapLogic.getAllMaps();
 
-            return Ok(maps);
+            return maps;
+        }
+
+        [HttpGet("{id}")]
+        public Map Get(int id)
+        {
+            return _mapLogic.getMapById(id);
         }
 
         [HttpPost]
-        public IActionResult AddMap([FromBody] string mapName, int difficulty)
+        public void Post([FromBody] Map map)
         {
-            _mapLogic.addMap(mapName, difficulty);
-
-            return Ok();
+            _mapLogic.addMap(map);
         }
+
+        [HttpPut]
+        public void Put([FromBody] Map map)
+        {
+            _mapLogic.renameMap(map.MapId, map.MapName);
+        }
+
+        [HttpDelete("{id}")]
+        public void Delete(int id)
+        {
+            _mapLogic.deleteMap(id);
+        }
+
+        //[HttpPost]
+        //public IActionResult AddMap([FromBody] Map map)
+        //{
+        //    _mapLogic.addMap(map);
+
+        //    return Ok();
+        //}
     }
 }
