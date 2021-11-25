@@ -14,20 +14,21 @@ namespace HH5VQ6_HFT_2021221.Repository
         {
 
         }
-        public void changeStatus(int id, bool newStatus, string eliminatedOnMap)
+        public void changeStatus(int id, bool newStatus, int eliminatedOnMapId)
         {
             var player = GetOne(id);
             player.AliveOrDead = newStatus;
-            player.EliminatedOnMap_MapId = gameDbContext.Maps.Where(x => x.MapName == eliminatedOnMap).Select(x => x.MapId).FirstOrDefault();
+            //player.EliminatedOnMap_MapId = gameDbContext.Maps.Where(x => x.MapName == eliminatedOnMap).Select(x => x.MapId).FirstOrDefault();
+            player.EliminatedOnMap_MapId = eliminatedOnMapId;
             gameDbContext.SaveChanges();
         }
 
-        public void customId(int id, int customId)
-        {
-            var player = GetOne(id);
-            player.PlayerId = customId;
-            gameDbContext.SaveChanges();
-        }
+        //public void customId(int id, int customId)
+        //{
+        //    var player = GetOne(id);
+        //    player.PlayerId = customId;
+        //    gameDbContext.SaveChanges();
+        //}
 
         public void registerNewPlayer(Player newPlayer)
         {

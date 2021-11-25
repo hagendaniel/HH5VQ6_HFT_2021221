@@ -97,11 +97,18 @@ namespace HH5VQ6_HFT_2021221.Test
             Assert.That(got.MapName == ("Red Light Green Light"));
         }
 
+        //[Test]
+        //public void ChangeSomeonesId()
+        //{
+        //    playerLogic.customId(1, 218);
+        //    Assert.That(playerLogic.getPlayerById(218), Is.Not.Null);
+        //}
+
         [Test]
-        public void ChangeSomeonesId()
+        public void ChangePlayerStatus()
         {
-            playerLogic.customId(1, 218);
-            Assert.That(playerLogic.getPlayerById(218), Is.Not.Null);
+            playerLogic.changeStatus(1, false, 3);
+            Assert.That(playerLogic.getPlayerById(1).EliminatedOnMap_MapId, Is.Not.Null);
         }
 
         [Test]

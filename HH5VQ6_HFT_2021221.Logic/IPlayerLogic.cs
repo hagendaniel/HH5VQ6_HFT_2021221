@@ -12,8 +12,8 @@ namespace HH5VQ6_HFT_2021221.Logic
         Player getPlayerById(int id);
         void registerNewPlayer(/*string name, DateTime dateTime, int debt*/ Player player);
         void removePlayer(int id);
-        void changeStatus(int id, bool newStatus, string eliminatedOnMap);
-        void customId(int id, int customId);
+        void changeStatus(int id, bool newStatus, int eliminatedOnMapId);
+        //void customId(int id, int customId);
         IList<Player> getAllPlayers();
     }
 }

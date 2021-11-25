@@ -19,15 +19,15 @@ namespace HH5VQ6_HFT_2021221.Logic
             seasonRepository = _seasonRepository;
         }
 
-        public void changeStatus(int id, bool newStatus, string eliminatedOnMap)
+        public void changeStatus(int id, bool newStatus, int eliminatedOnMapId)
         {
-            playerRepository.changeStatus(id, newStatus, eliminatedOnMap);
+            playerRepository.changeStatus(id, newStatus, eliminatedOnMapId);
         }
 
-        public void customId(int id, int customId)
-        {
-            playerRepository.customId(id, customId);
-        }
+        //public void customId(int id, int customId)
+        //{
+        //    playerRepository.customId(id, customId);
+        //}
 
         public IList<Player> getAllPlayers()
         {
