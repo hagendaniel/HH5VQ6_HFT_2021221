@@ -38,11 +38,11 @@ namespace HH5VQ6_HFT_2021221.Endpoint.Controllers
             playerLogic.registerNewPlayer(player);
         }
 
-        //[HttpPut]       ------------------------------------------------------------------
-        //public void Put([FromBody] Player player)
-        //{
-        //    playerLogic.changeStatus(player.PlayerId, player.AliveOrDead);
-        //}
+        [HttpPut]       //------------------------------------------------------------------
+        public void Put([FromBody] Player player)
+        {
+            playerLogic.changeStatus(player.PlayerId, player.AliveOrDead, Convert.ToInt32(player.EliminatedOnMap_MapId));
+        }
 
         [HttpDelete("{id}")]
         public void Delete(int id)

@@ -96,23 +96,41 @@ namespace HH5VQ6_HFT_2021221.Client
                 .Add("Show all maps", () => GetAllMaps(rest))
                 .Add("Show a map by id", () => GetMap(rest))
                 .Add("Rename a map", () => RenameMap(rest))
-                .Add("Delete a map", () => DeleteMap(rest));
+                .Add("Delete a map", () => DeleteMap(rest))
+                .Add("Main menu", ConsoleMenu.Close);
 
             var placeMenu = new ConsoleMenu()
                 .Add("Create new place", () => CreatePlace(rest))
                 .Add("Show all places", () => GetAllPlaces(rest))
                 .Add("Show a place by id", () => GetPlace(rest))
                 .Add("Change place to a new one in the same country", () => ChangePlace(rest))
-                .Add("Delete a place", () => DeletePlace(rest));
+                .Add("Delete a place", () => DeletePlace(rest))
+                .Add("Main menu", ConsoleMenu.Close);
 
             var playerMenu = new ConsoleMenu()
                 .Add("Register new player", () => CreatePlayer(rest))
                 .Add("Show all players", () => GetAllPlayers(rest))
                 .Add("Show a player by id", () => GetPlayer(rest))
                 .Add("Eliminate a player", () => EliminatePlayer(rest))
-                .Add("Delete a player", () => DeletePlayer(rest));
+                .Add("Delete a player", () => DeletePlayer(rest))
+                .Add("Main menu", ConsoleMenu.Close);
 
-            playerMenu.Show();
+            var seasonMenu = new ConsoleMenu()
+                .Add("Create new season", () => CreateSeason(rest))
+                .Add("Show all seasons", () => GetAllSeasons(rest))
+                .Add("Show a season by its id", () => GetSeason(rest))
+                .Add("Rename a season", () => RenameSeason(rest))
+                .Add("Delete a season", () => DeleteSeason(rest))
+                .Add("Main menu", ConsoleMenu.Close);
+
+            var mainMenu = new ConsoleMenu()
+                .Add("Create/Read/Update/Delete in Maps", () => mapMenu.Show())
+                .Add("Create/Read/Update/Delete in Places", () => placeMenu.Show())
+                .Add("Create/Read/Update/Delete in Players", () => playerMenu.Show())
+                .Add("Create/Read/Update/Delete in Seasons", () => seasonMenu.Show())
+                .Add("Exit", ConsoleMenu.Close);
+
+            mainMenu.Show();
 
             Console.ReadKey();
         }
@@ -221,8 +239,15 @@ namespace HH5VQ6_HFT_2021221.Client
             {
                 Console.WriteLine("Id of the map you want to delete: ");
                 int id = Convert.ToInt32(Console.ReadLine());
-                restService.Delete(id, "maps");
-                Console.WriteLine($"The map with the id of ({id}) has been deleted.");
+                if (restService.Get<Map>(id, "maps").Players.Count() == 0)
+                {
+                    restService.Delete(id, "maps");
+                    Console.WriteLine($"The map with the id of ({id}) has been deleted.");
+                }
+                else
+                {
+                    Console.WriteLine("First you should delete all players who has died on this map.");
+                }
             }
             catch (System.NullReferenceException)
             {
@@ -301,8 +326,15 @@ namespace HH5VQ6_HFT_2021221.Client
             {
                 Console.WriteLine("Id of the place you want to delete: ");
                 int id = Convert.ToInt32(Console.ReadLine());
-                restService.Delete(id, "places");
-                Console.WriteLine($"The place with the id of ({id}) has been deleted.");
+                if (restService.Get<Place>(id, "places").Seasons.Count() == 0)
+                {
+                    restService.Delete(id, "places");
+                    Console.WriteLine($"The place with the id of ({id}) has been deleted.");
+                }
+                else
+                {
+                    Console.WriteLine("First you should delete all seasons which was played here.");
+                }
             }
             catch (System.NullReferenceException)
             {
@@ -311,6 +343,7 @@ namespace HH5VQ6_HFT_2021221.Client
             Console.ReadKey();
         }
         #endregion
+        //CRUD METHODS FOR THE PLAYERMENU----------------------------------------------------------------------------------- 
         #region PLAYERMENU_CRUD
         private static void CreatePlayer(RestService restService)
         {
@@ -363,12 +396,17 @@ namespace HH5VQ6_HFT_2021221.Client
                 Console.WriteLine("Id of the player who got eliminated: ");
                 int id = Convert.ToInt32(Console.ReadLine());
                 Player player = restService.Get<Player>(id, "players");
-                Console.WriteLine("Id of the map where the player got eliminated: ");
-                int mapId = Convert.ToInt32(Console.ReadLine());
-                player.AliveOrDead = false;
-                player.EliminatedOnMap_MapId = mapId;
-                restService.Put(player, "players");
-                Console.WriteLine($"Player {player.PlayerId}, eliminated.");
+                if (player.EliminatedOnMap_MapId == null)
+                {
+                    Console.WriteLine("Id of the map where the player got eliminated: ");
+                    int mapId = Convert.ToInt32(Console.ReadLine());
+                    player.AliveOrDead = false;
+                    //int linkedMapId = restService.Get<Map>("maps").Where(x => x.MapId == player.EliminatedOnMap_MapId).Select(x => x.MapId).FirstOrDefault();
+                    player.EliminatedOnMap_MapId = mapId;
+                    restService.Put(player, "players");
+                    Console.WriteLine($"Player {player.PlayerId}, eliminated.");
+                }
+                else Console.WriteLine("The player already got eliminated.");
             }
             catch (System.NullReferenceException)
             {
@@ -377,14 +415,108 @@ namespace HH5VQ6_HFT_2021221.Client
             Console.ReadKey();
         }
 
-        private static void DeletePlayer(RestService restService)
+        private static void DeletePlayer(RestService restService) //------------------------------------------------------------------------------
         {
             try
             {
                 Console.WriteLine("Id of the player you want to delete: ");
                 int id = Convert.ToInt32(Console.ReadLine());
-                restService.Delete(id, "players");
-                Console.WriteLine($"Player {id} has been deleted.");
+                if (restService.Get<Player>("players").Equals(null))
+                {
+                    Console.WriteLine("Player does not exist.");
+                }
+                else
+                {
+                    restService.Delete(id, "players");
+                    Console.WriteLine($"Player {id} has been deleted.");
+                }
+            }
+            catch (System.Exception)
+            {
+                Console.WriteLine("Invalid id");
+            }
+            Console.ReadKey();
+        }
+        #endregion
+        //CRUD METHODS FOR THE SEASONMENU-----------------------------------------------------------------------------------
+        #region SEASONMENU_CRUD
+        private static void CreateSeason(RestService restService)
+        {
+            Console.WriteLine("Name of the new season: ");
+            string name = Console.ReadLine();
+            Console.WriteLine("Id of the place where it is held");
+            int placeId = Convert.ToInt32(Console.ReadLine());
+            restService.Post(new Season
+            {
+                SeasonNickname=name,
+                PlaceId=placeId
+            }, "seasons") ;
+            Console.WriteLine($"Season {restService.Get<Season>("seasons").Last().SeasonId} has been created.");
+            Console.ReadKey();
+        }
+
+        private static void GetAllSeasons(RestService restService)
+        {
+            var seasons = restService.Get<Season>("seasons");
+            foreach (var season in seasons)
+            {
+                Console.WriteLine($"Season {season.SeasonId}: {season.SeasonNickname}");
+            }
+            Console.ReadKey();
+        }
+
+        private static void GetSeason(RestService restService)
+        {
+            try
+            {
+                Console.WriteLine("Id of the season: ");
+                int id = Convert.ToInt32(Console.ReadLine());
+                Season season = restService.Get<Season>(id, "seasons");
+                Console.WriteLine($"Season {id} is called {season.SeasonNickname}.");
+            }
+            catch (System.NullReferenceException)
+            {
+                Console.WriteLine("Invalid id");
+            }
+            Console.ReadKey();
+        }
+
+        private static void RenameSeason(RestService restService)
+        {
+            try
+            {
+                Console.WriteLine("Id of the season you want to rename: ");
+                int id = Convert.ToInt32(Console.ReadLine());
+                Season season = restService.Get<Season>(id, "seasons");
+                string oldName = season.SeasonNickname;
+                Console.WriteLine("New name of the season: ");
+                string newName = Console.ReadLine();
+                season.SeasonNickname = newName;
+                restService.Put(season, "seasons");
+                Console.WriteLine($"The season has been renamed from {oldName} to {newName}");
+            }
+            catch (System.NullReferenceException)
+            {
+                Console.WriteLine("Invalid id");
+            }
+            Console.ReadKey();
+        }
+
+        private static void DeleteSeason(RestService restService)
+        {
+            try
+            {
+                Console.WriteLine("Id of the season you want to delete: ");
+                int id = Convert.ToInt32(Console.ReadLine());
+                if (restService.Get<Season>(id, "seasons").Players.Count()==0)
+                {
+                    restService.Delete(id, "seasons");
+                    Console.WriteLine($"Season {id} has been deleted.");
+                }
+                else
+                {
+                    Console.WriteLine("First you should delete all players linked to this season.");
+                }
             }
             catch (System.NullReferenceException)
             {
