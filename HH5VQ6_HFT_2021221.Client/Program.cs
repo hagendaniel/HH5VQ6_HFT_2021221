@@ -123,11 +123,17 @@ namespace HH5VQ6_HFT_2021221.Client
                 .Add("Delete a season", () => DeleteSeason(rest))
                 .Add("Main menu", ConsoleMenu.Close);
 
+            var noncrudMenu = new ConsoleMenu()
+                .Add("In which city does a player got eliminated?", () => InWhichCityGivenPlayerDied(rest))
+                .Add("Which map was the deadliest in a season?", ()=> WhichMapGaveTheMostDeadlyExperience(rest))
+                .Add("Main menu", ConsoleMenu.Close);
+
             var mainMenu = new ConsoleMenu()
                 .Add("Create/Read/Update/Delete in Maps", () => mapMenu.Show())
                 .Add("Create/Read/Update/Delete in Places", () => placeMenu.Show())
                 .Add("Create/Read/Update/Delete in Players", () => playerMenu.Show())
                 .Add("Create/Read/Update/Delete in Seasons", () => seasonMenu.Show())
+                .Add("Some non-crud queries", () => noncrudMenu.Show())
                 .Add("Exit", ConsoleMenu.Close);
 
             mainMenu.Show();
@@ -343,7 +349,7 @@ namespace HH5VQ6_HFT_2021221.Client
             Console.ReadKey();
         }
         #endregion
-        //CRUD METHODS FOR THE PLAYERMENU----------------------------------------------------------------------------------- 
+        //CRUD METHODS FOR THE PLAYERMENU----------------------------------------------------------------------------------- DELETET MEGNÉÉÉÉÉÉÉÉÉÉÉÉÉÉÉÉZ
         #region PLAYERMENU_CRUD
         private static void CreatePlayer(RestService restService)
         {
@@ -525,5 +531,46 @@ namespace HH5VQ6_HFT_2021221.Client
             Console.ReadKey();
         }
         #endregion
+        //NON-CRUD METHODS
+        //private static void InWhichCityGivenPlayerDied(RestService restService)
+        //{
+        //    Console.WriteLine("Id of the player who you are interested in: ");
+        //    int id = Convert.ToInt32(Console.ReadLine());
+        //    var cityName = restService.GetInWhichCityPlayerDied<Place>(id, "places", "seasons", "players");
+        //    Console.WriteLine($"The player died in {cityName}");
+        //    Console.ReadKey();
+        //}
+
+        private static void InWhichCityGivenPlayerDied(RestService restService)
+        {
+            Console.WriteLine("Id of the player who you are interested in: ");
+            int playerId = Convert.ToInt32(Console.ReadLine());
+            try
+            {
+                var place = restService.Get<InWhichCityPlayerDied>("places", "inWhichCityPlayerDied", playerId);
+                Console.WriteLine($"The player died in {place.PlaceName}");
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("The given id is invalid, either the player is still alive, or doesn't exist.");
+            }
+            Console.ReadKey();
+        }
+
+        private static void WhichMapGaveTheMostDeadlyExperience(RestService restService)
+        {
+            Console.WriteLine("Enter the name of a season to find out which map gave the most deadly experience: ");
+            string seasonName = Console.ReadLine();
+            try
+            {
+                var map = restService.Get<TheKillerMap>("maps", "thekillermap", seasonName);
+                Console.WriteLine($"The deadliest map in {map.SeasonName} was {map.MapName}");
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("No season with the given name exists");
+            }
+            Console.ReadKey();
+        }
     }
 }

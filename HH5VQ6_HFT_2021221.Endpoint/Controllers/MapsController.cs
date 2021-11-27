@@ -58,5 +58,11 @@ namespace HH5VQ6_HFT_2021221.Endpoint.Controllers
 
         //    return Ok();
         //}
+
+        [HttpGet("thekillermap/{seasonname}")]
+        public TheKillerMap TheKillerMap(string seasonName)
+        {
+            return _mapLogic.TheKillerMap(seasonName);
+        }
     }
 }

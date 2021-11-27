@@ -49,5 +49,18 @@ namespace HH5VQ6_HFT_2021221.Endpoint.Controllers
         {
             placeLogic.removePlace(id);
         }
+
+        ////non-crud
+        //[HttpGet("players/{id}")]
+        //public string InWhichCityPlayerDied(int id)
+        //{
+        //    return placeLogic.inWhichCityPlayerDied(id);
+        //}
+
+        [HttpGet("inwhichcityplayerdied/{playerId}")]
+        public InWhichCityPlayerDied inWhichCityPlayerDied(int playerId)
+        {
+            return placeLogic.inWhichCityPlayerDied(playerId);
+        }
     }
 }

@@ -48,26 +48,66 @@ namespace HH5VQ6_HFT_2021221.Logic
 
         //non-crud
 
-        public string inWhichCityPlayerDied(int playerId)
-        {
-            Player player = playerRepository.GetOne(playerId);
-            if (player.EliminatedOnMap_MapId == null)
-            {
-                throw new PlayerNotDeadException();
-            }
-            else if (player is null)
-            {
-                throw new PlayerDoesNotExistException();
-            }
-            else
-            {
-                IQueryable<Season> seasons = seasonRepository.GetAll();
-                IQueryable<Place> places = placeRepository.GetAll();
-                ICollection<Player> players = playerRepository.GetAll().ToList();
+        //public string inWhichCityPlayerDied(int playerId)
+        //{
+        //    Player player = playerRepository.GetOne(playerId);
+        //    if (player.EliminatedOnMap_MapId == null)
+        //    {
+        //        throw new PlayerNotDeadException();
+        //    }
+        //    else if (player is null)
+        //    {
+        //        throw new PlayerDoesNotExistException();
+        //    }
+        //    else
+        //    {
+        //        IQueryable<Season> seasons = seasonRepository.GetAll();
+        //        IQueryable<Place> places = placeRepository.GetAll();
+        //        ICollection<Player> players = playerRepository.GetAll().ToList();
 
-                Season season = seasons.Where(x => x.SeasonId == player.SeasonId).FirstOrDefault();
-                string toReturnCountry = places.Where(x => x.PlaceId == season.PlaceId).Select(x => x.PlaceName).FirstOrDefault();
-                return toReturnCountry;
+        //        Season season = seasons.Where(x => x.SeasonId == player.SeasonId).FirstOrDefault();
+        //        string toReturnCountry = places.Where(x => x.PlaceId == season.PlaceId).Select(x => x.PlaceName).FirstOrDefault();
+        //        return toReturnCountry;
+        //    }
+        //}
+
+        public InWhichCityPlayerDied inWhichCityPlayerDied(int playerId)
+        {
+            try
+            {
+
+                Player player = playerRepository.GetOne(playerId);
+                if (player.EliminatedOnMap_MapId == null)
+                {
+                    throw new PlayerNotDeadException();
+                }
+                else if (player is null)
+                {
+                    throw new PlayerDoesNotExistException();
+                }
+                else
+                {
+                    IQueryable<Season> seasons = seasonRepository.GetAll();
+                    IQueryable<Place> places = placeRepository.GetAll();
+                    ICollection<Player> players = playerRepository.GetAll().ToList();
+
+                    Season season = seasons.Where(x => x.SeasonId == player.SeasonId).FirstOrDefault();
+                    //string toReturnCountry = places.Where(x => x.PlaceId == season.PlaceId).Select(x => x.PlaceName).FirstOrDefault();
+                    Place place = places.Where(x => x.PlaceId == season.PlaceId).FirstOrDefault();
+                    InWhichCityPlayerDied toReturn = new InWhichCityPlayerDied { PlayerId = playerId, PlaceName = place.PlaceName };
+                    return toReturn;
+                    //return toReturnCountry;
+                }
+            }
+            catch (PlayerNotDeadException)
+            {
+                //Console.WriteLine("The player is still alive");
+                return null;
+            }
+            catch (PlayerDoesNotExistException)
+            {
+                //Console.WriteLine("The player with the given id does not exist");
+                return null;
             }
         }
     }

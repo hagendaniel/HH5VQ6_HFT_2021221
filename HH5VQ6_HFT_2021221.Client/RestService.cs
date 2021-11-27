@@ -92,5 +92,40 @@ namespace HH5VQ6_HFT_2021221.Client
 
             response.EnsureSuccessStatusCode();
         }
+
+        //for non-crud
+        //public T GetInWhichCityPlayerDied<T>(int id, string endpoint, string path, string from)
+        //{
+        //    T item = default(T);
+        //    HttpResponseMessage response = client.GetAsync(from+"/"+id + "/" + path + "/"+endpoint.ToString()).GetAwaiter().GetResult();
+        //    if (response.IsSuccessStatusCode)
+        //    {
+        //        item = response.Content.ReadAsAsync<T>().GetAwaiter().GetResult();
+        //    }
+        //    return item;
+        //}
+
+        public T Get<T>(string endpoint, string noncrudmethod, int id)
+        {
+            T item = default(T);
+            HttpResponseMessage response = client.GetAsync(endpoint + "/" +noncrudmethod+"/"+ id.ToString()).GetAwaiter().GetResult();
+            if (response.IsSuccessStatusCode)
+            {
+                item = response.Content.ReadAsAsync<T>().GetAwaiter().GetResult();
+            }
+            return item;
+        }
+
+        public T Get<T>(string endpoint, string noncrudmethod, string name)
+        {
+            T item = default(T);
+            HttpResponseMessage response = client.GetAsync(endpoint + "/" + noncrudmethod + "/" + name).GetAwaiter().GetResult();
+            if (response.IsSuccessStatusCode)
+            {
+                item = response.Content.ReadAsAsync<T>().GetAwaiter().GetResult();
+            }
+            return item;
+        }
+
     }
 }
