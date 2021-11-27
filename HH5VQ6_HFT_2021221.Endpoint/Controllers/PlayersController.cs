@@ -49,5 +49,11 @@ namespace HH5VQ6_HFT_2021221.Endpoint.Controllers
         {
             playerLogic.removePlayer(id);
         }
+
+        [HttpGet("whowongivenseason/{seasonId}")]
+        public Player whoWonGivenSeason(int seasonId)
+        {
+            return playerLogic.whoWonGivenSeason(seasonId);
+        }
     }
 }

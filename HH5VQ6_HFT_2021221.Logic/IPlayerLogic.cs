@@ -15,5 +15,7 @@ namespace HH5VQ6_HFT_2021221.Logic
         void changeStatus(int id, bool newStatus, int eliminatedOnMapId);
         //void customId(int id, int customId);
         IList<Player> getAllPlayers();
+
+        Player whoWonGivenSeason(int seasonId);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -24,6 +25,7 @@ namespace HH5VQ6_HFT_2021221.Models
         public int Debt { get; set; }
 
         public int Age { get; set; }
+        [DefaultValue("true")]
         public bool AliveOrDead { get; set; }
 
         [ForeignKey(nameof(Map))]
@@ -39,5 +41,10 @@ namespace HH5VQ6_HFT_2021221.Models
         [NotMapped]
         [JsonIgnore]
         public virtual Map Map { get; set; }
+
+        public Player()
+        {
+            AliveOrDead = true;
+        }
     }
 }

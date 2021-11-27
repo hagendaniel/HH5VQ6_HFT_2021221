@@ -126,6 +126,7 @@ namespace HH5VQ6_HFT_2021221.Client
             var noncrudMenu = new ConsoleMenu()
                 .Add("In which city does a player got eliminated?", () => InWhichCityGivenPlayerDied(rest))
                 .Add("Which map was the deadliest in a season?", ()=> WhichMapGaveTheMostDeadlyExperience(rest))
+                .Add("Who won a given season?", () => WhoWonGivenSeason(rest))
                 .Add("Main menu", ConsoleMenu.Close);
 
             var mainMenu = new ConsoleMenu()
@@ -569,6 +570,22 @@ namespace HH5VQ6_HFT_2021221.Client
             catch (Exception)
             {
                 Console.WriteLine("No season with the given name exists");
+            }
+            Console.ReadKey();
+        }
+
+        private static void WhoWonGivenSeason(RestService restService)
+        {
+            Console.WriteLine("Id of the season, whose winner you're interested in: ");
+            int seasonId = Convert.ToInt32(Console.ReadLine());
+            try
+            {
+                var player = restService.Get<Player>("players", "whowongivenseason", seasonId);
+                Console.WriteLine($"Season {player.SeasonId} was won by {player.PlayerName}");
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("The given season does not exist.");
             }
             Console.ReadKey();
         }
