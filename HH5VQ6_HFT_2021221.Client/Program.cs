@@ -127,6 +127,7 @@ namespace HH5VQ6_HFT_2021221.Client
                 .Add("In which city does a player got eliminated?", () => InWhichCityGivenPlayerDied(rest))
                 .Add("Which map was the deadliest in a season?", ()=> WhichMapGaveTheMostDeadlyExperience(rest))
                 .Add("Who won a given season?", () => WhoWonGivenSeason(rest))
+                .Add("When was the first game held at a given place?", () => InWhichSeasonFirstGameHeldInGivenPlace(rest))
                 .Add("Main menu", ConsoleMenu.Close);
 
             var mainMenu = new ConsoleMenu()
@@ -586,6 +587,22 @@ namespace HH5VQ6_HFT_2021221.Client
             catch (Exception)
             {
                 Console.WriteLine("The given season does not exist.");
+            }
+            Console.ReadKey();
+        }
+
+        private static void InWhichSeasonFirstGameHeldInGivenPlace(RestService restService)
+        {
+            Console.WriteLine("Name of the place, that you want to find out when it gave place first for a game: ");
+            string placeName = Console.ReadLine();
+            try
+            {
+                var season = restService.Get<Season>("seasons", "inwhichseasonfirstgameingivenplace", placeName);
+                Console.WriteLine($"The first game was held in Season {season.SeasonId} at {placeName}");
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("The given place does not exist");
             }
             Console.ReadKey();
         }

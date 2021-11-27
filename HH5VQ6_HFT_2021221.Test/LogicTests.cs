@@ -71,7 +71,7 @@ namespace HH5VQ6_HFT_2021221.Test
         public void whichSeasonGame()
         {
             SeasonLogic seasonLogic = new SeasonLogic(seasonRepository, placeRepository, playerRepository);
-            Assert.That(() => seasonLogic.whichSeasonGame("Buda"), Is.EqualTo("Medieval Knockout"));
+            Assert.That(() => seasonLogic.whichSeasonFirstGameInGivenPlace("Buda"), Is.EqualTo("Medieval Knockout"));
         }
 
         [TestCase(1)]

@@ -48,7 +48,24 @@ namespace HH5VQ6_HFT_2021221.Logic
         }
 
         //non-crud
-        public string whichSeasonGame(string placeName) //In which season was the game hold in the given city first
+        //public string whichSeasonGame(string placeName) //In which season was the game hold in the given city first
+        //{
+        //    ICollection<Season> seasons = seasonRepository.GetAll().ToList();
+        //    IQueryable<Place> places = placeRepository.GetAll();
+
+        //    Place place = places.Where(x => x.PlaceName == placeName).FirstOrDefault();
+        //    place.Seasons = seasons.Where(x => x.PlaceId == place.PlaceId).ToList();
+
+        //    //int toReturn = place.PlaceId;
+        //    string toReturn = seasons.Where(x => x.PlaceId == place.PlaceId).Select(x =>x.SeasonNickname).FirstOrDefault();
+
+        //    if (place is null)
+        //        throw new InvalidPlaceException();
+        //    else
+        //        return toReturn;
+        //}
+
+        public Season whichSeasonFirstGameInGivenPlace(string placeName) //In which season was the game hold in the given city first
         {
             ICollection<Season> seasons = seasonRepository.GetAll().ToList();
             IQueryable<Place> places = placeRepository.GetAll();
@@ -57,7 +74,7 @@ namespace HH5VQ6_HFT_2021221.Logic
             place.Seasons = seasons.Where(x => x.PlaceId == place.PlaceId).ToList();
 
             //int toReturn = place.PlaceId;
-            string toReturn = seasons.Where(x => x.PlaceId == place.PlaceId).Select(x =>x.SeasonNickname).FirstOrDefault();
+            Season toReturn = seasons.Where(x => x.PlaceId == place.PlaceId).FirstOrDefault();
 
             if (place is null)
                 throw new InvalidPlaceException();

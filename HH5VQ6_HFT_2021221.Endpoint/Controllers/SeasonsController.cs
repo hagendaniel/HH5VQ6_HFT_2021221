@@ -49,5 +49,11 @@ namespace HH5VQ6_HFT_2021221.Endpoint.Controllers
         {
             seasonLogic.removeSeason(id);
         }
+
+        [HttpGet("inwhichseasonfirstgameingivenplace/{placeName}")]
+        public Season whichSeasonFirstGameInGivenPlace(string placeName)
+        {
+            return seasonLogic.whichSeasonFirstGameInGivenPlace(placeName);
+        }
     }
 }
