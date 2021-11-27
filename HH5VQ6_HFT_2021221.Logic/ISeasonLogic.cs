@@ -15,5 +15,6 @@ namespace HH5VQ6_HFT_2021221.Logic
         void changeName(int id, string newName);
         IList<Season> getAllSeasons();
         Season whichSeasonFirstGameInGivenPlace(string placeName);
+        Season whichSeasonWonByGivenPlayer(int playerId);
     }
 }

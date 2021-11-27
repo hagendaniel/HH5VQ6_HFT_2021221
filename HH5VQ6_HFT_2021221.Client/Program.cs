@@ -128,6 +128,7 @@ namespace HH5VQ6_HFT_2021221.Client
                 .Add("Which map was the deadliest in a season?", ()=> WhichMapGaveTheMostDeadlyExperience(rest))
                 .Add("Who won a given season?", () => WhoWonGivenSeason(rest))
                 .Add("When was the first game held at a given place?", () => InWhichSeasonFirstGameHeldInGivenPlace(rest))
+                .Add("Which season was won by given player?", () => WhichSeasonWasWonByGivenPlayer(rest))
                 .Add("Main menu", ConsoleMenu.Close);
 
             var mainMenu = new ConsoleMenu()
@@ -605,6 +606,21 @@ namespace HH5VQ6_HFT_2021221.Client
                 Console.WriteLine("The given place does not exist");
             }
             Console.ReadKey();
+        }
+
+        private static void WhichSeasonWasWonByGivenPlayer(RestService restService)
+        {
+            Console.WriteLine("Give the number of the player, who you're interested in: ");
+            int playerId = Convert.ToInt32(Console.ReadLine());
+            try
+            {
+                var season = restService.Get<Season>("seasons", "whichseasonwonbygivenplayer", playerId);
+                Console.WriteLine($"Player number {playerId} won season {season.SeasonId}");
+            }
+            catch (Exception)
+            {
+                Console.WriteLine($"Player {playerId} either does not exist, or already dead.");
+            }
         }
     }
 }

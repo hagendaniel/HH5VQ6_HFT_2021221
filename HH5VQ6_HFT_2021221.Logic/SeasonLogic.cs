@@ -82,7 +82,26 @@ namespace HH5VQ6_HFT_2021221.Logic
                 return toReturn;
         }
 
-        public string whichSeasonWonByGivenPlayer(int playerId)
+        //public string whichSeasonWonByGivenPlayer(int playerId)
+        //{
+        //    Player player = playerRepository.GetOne(playerId);
+        //    if (player.EliminatedOnMap_MapId != null)
+        //    {
+        //        throw new PlayerAlreadyDeadException();
+        //    }
+        //    else if (player is null)
+        //    {
+        //        throw new PlayerDoesNotExistException();
+        //    }
+        //    else
+        //    {
+        //        IQueryable<Season> seasons = seasonRepository.GetAll();
+        //        string toReturn = seasons.Where(x => x.SeasonId == player.SeasonId).Select(x => x.SeasonNickname).FirstOrDefault();
+        //        return toReturn;
+        //    }
+        //}
+
+        public Season whichSeasonWonByGivenPlayer(int playerId)
         {
             Player player = playerRepository.GetOne(playerId);
             if (player.EliminatedOnMap_MapId != null)
@@ -96,7 +115,7 @@ namespace HH5VQ6_HFT_2021221.Logic
             else
             {
                 IQueryable<Season> seasons = seasonRepository.GetAll();
-                string toReturn = seasons.Where(x => x.SeasonId == player.SeasonId).Select(x => x.SeasonNickname).FirstOrDefault();
+                Season toReturn = seasons.Where(x => x.SeasonId == player.SeasonId).FirstOrDefault();
                 return toReturn;
             }
         }

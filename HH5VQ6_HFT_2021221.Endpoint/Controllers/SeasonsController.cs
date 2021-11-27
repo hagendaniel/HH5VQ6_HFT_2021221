@@ -55,5 +55,11 @@ namespace HH5VQ6_HFT_2021221.Endpoint.Controllers
         {
             return seasonLogic.whichSeasonFirstGameInGivenPlace(placeName);
         }
+
+        [HttpGet("whichseasonwonbygivenplayer/{playerId}")]
+        public Season whichSeasonWonByGivenPlayer(int playerId)
+        {
+            return seasonLogic.whichSeasonWonByGivenPlayer(playerId);
+        }
     }
 }
