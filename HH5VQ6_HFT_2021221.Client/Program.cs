@@ -550,7 +550,7 @@ namespace HH5VQ6_HFT_2021221.Client
             int playerId = Convert.ToInt32(Console.ReadLine());
             try
             {
-                var place = restService.Get<InWhichCityPlayerDied>("places", "inWhichCityPlayerDied", playerId);
+                var place = restService.Get<Place>("places", "inWhichCityPlayerDied", playerId);
                 Console.WriteLine($"The player died in {place.PlaceName}");
             }
             catch (Exception)
@@ -566,8 +566,8 @@ namespace HH5VQ6_HFT_2021221.Client
             string seasonName = Console.ReadLine();
             try
             {
-                var map = restService.Get<TheKillerMap>("maps", "thekillermap", seasonName);
-                Console.WriteLine($"The deadliest map in {map.SeasonName} was {map.MapName}");
+                var map = restService.Get<Map>("maps", "thekillermap", seasonName);
+                Console.WriteLine($"The deadliest map in {seasonName} was {map.MapName}");
             }
             catch (Exception)
             {
@@ -621,6 +621,7 @@ namespace HH5VQ6_HFT_2021221.Client
             {
                 Console.WriteLine($"Player {playerId} either does not exist, or already dead.");
             }
+            Console.ReadKey();
         }
     }
 }

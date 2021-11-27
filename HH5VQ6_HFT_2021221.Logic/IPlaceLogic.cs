@@ -14,7 +14,7 @@ namespace HH5VQ6_HFT_2021221.Logic
         void removePlace(int id);
         void changePlace(int id, string newPlace);
         //string inWhichCityPlayerDied(int playerId); //for non-crud
-        InWhichCityPlayerDied inWhichCityPlayerDied(int playerId); //for non-crud
+        Place inWhichCityPlayerDied(int playerId); //for non-crud
         IList<Place> getAllPlaces();
     }
 }

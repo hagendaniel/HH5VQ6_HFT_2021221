@@ -63,7 +63,7 @@ namespace HH5VQ6_HFT_2021221.Logic
         //    return toReturn.MapName;
         //}
 
-        public TheKillerMap TheKillerMap(string seasonName) //Which map killed most of the players in the given season
+        public Map TheKillerMap(string seasonName) //Which map killed most of the players in the given season
         {
             IQueryable<Season> seasons = seasonRepository.GetAll();
             //IQueryable<Map> maps = mapRepository.GetAll();
@@ -75,9 +75,9 @@ namespace HH5VQ6_HFT_2021221.Logic
             var most = groupByElimination.OrderByDescending(x => x.Count()).Select(x => x.Key).First();//.Select(x => x.EliminatedOnMap_MapId);
             //var mostPlayersKilledHereMapId = players.GroupBy(p => p.EliminatedOnMap_MapId).OrderByDescending(x => x.Count()).First();
             Map map = mapRepository.GetOne(Convert.ToInt32(most));
-            TheKillerMap theKillerMap = new TheKillerMap { SeasonName = seasonName, MapName = map.MapName };
+            //TheKillerMap theKillerMap = new TheKillerMap { SeasonName = seasonName, MapName = map.MapName };
 
-            return theKillerMap;
+            return map;
         }
     }
 }

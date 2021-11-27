@@ -58,7 +58,7 @@ namespace HH5VQ6_HFT_2021221.Endpoint.Controllers
         //}
 
         [HttpGet("inwhichcityplayerdied/{playerId}")]
-        public InWhichCityPlayerDied inWhichCityPlayerDied(int playerId)
+        public Place inWhichCityPlayerDied(int playerId)
         {
             return placeLogic.inWhichCityPlayerDied(playerId);
         }

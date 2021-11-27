@@ -60,7 +60,7 @@ namespace HH5VQ6_HFT_2021221.Endpoint.Controllers
         //}
 
         [HttpGet("thekillermap/{seasonname}")]
-        public TheKillerMap TheKillerMap(string seasonName)
+        public Map TheKillerMap(string seasonName)
         {
             return _mapLogic.TheKillerMap(seasonName);
         }

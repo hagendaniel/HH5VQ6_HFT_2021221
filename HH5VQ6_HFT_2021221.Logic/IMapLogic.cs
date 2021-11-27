@@ -15,6 +15,6 @@ namespace HH5VQ6_HFT_2021221.Logic
         void renameMap(int id, string newName);
         IList<Map> getAllMaps();
 
-        TheKillerMap TheKillerMap(string seasonName); //for non-crud
+        Map TheKillerMap(string seasonName); //for non-crud
     }
 }
