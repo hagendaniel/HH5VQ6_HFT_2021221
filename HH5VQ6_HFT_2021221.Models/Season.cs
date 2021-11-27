@@ -16,7 +16,7 @@ namespace HH5VQ6_HFT_2021221.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int SeasonId { get; set; }
         
-        [MaxLength(50)]
+        [MaxLength(30)]
         public string SeasonNickname { get; set; }
 
         [ForeignKey(nameof(Place))]

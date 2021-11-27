@@ -48,15 +48,15 @@ namespace HH5VQ6_HFT_2021221.Test
         public void inWhichCityPlayerDied()
         {
             PlaceLogic placeLogic = new PlaceLogic(placeRepository, playerRepository, seasonRepository);
-            Assert.That(() => placeLogic.inWhichCityPlayerDied(3), Is.EqualTo("Choi"));
-            Assert.That(() => placeLogic.inWhichCityPlayerDied(1), Throws.Exception);
+            Assert.That(() => placeLogic.inWhichCityPlayerDied(3).PlaceName, Is.EqualTo("Choi"));
+            Assert.That(() => placeLogic.inWhichCityPlayerDied(1).PlaceName, Throws.Exception);
         }
 
         [Test]
         public void WhichSeasonWonByGivenPlayer()
         {
             SeasonLogic seasonLogic = new SeasonLogic(seasonRepository, placeRepository, playerRepository);
-            Assert.That(() => seasonLogic.whichSeasonWonByGivenPlayer(1), Is.EqualTo("Personal Bankruptcy"));
+            Assert.That(() => seasonLogic.whichSeasonWonByGivenPlayer(1).SeasonNickname, Is.EqualTo("Personal Bankruptcy"));
             Assert.That(() => seasonLogic.whichSeasonWonByGivenPlayer(218), Throws.Exception);
         }
 
@@ -64,14 +64,14 @@ namespace HH5VQ6_HFT_2021221.Test
         public void TheKillerMap()
         {
             MapLogic mapLogic = new MapLogic(mapRepository, playerRepository, seasonRepository);
-            Assert.That(() => mapLogic.TheKillerMap("Personal Bankruptcy"), Is.EqualTo("Tud-of-War"));
+            Assert.That(() => mapLogic.TheKillerMap("Personal Bankruptcy").MapName, Is.EqualTo("Tud-of-War"));
         }
 
         [Test]
         public void whichSeasonGame()
         {
             SeasonLogic seasonLogic = new SeasonLogic(seasonRepository, placeRepository, playerRepository);
-            Assert.That(() => seasonLogic.whichSeasonFirstGameInGivenPlace("Buda"), Is.EqualTo("Medieval Knockout"));
+            Assert.That(() => seasonLogic.whichSeasonFirstGameInGivenPlace("Buda").SeasonNickname, Is.EqualTo("Medieval Knockout"));
         }
 
         [TestCase(1)]
@@ -123,8 +123,21 @@ namespace HH5VQ6_HFT_2021221.Test
         public void AddMapTest()
         {
             //Map toAdd = new Map { MapId = 5, MapName = "Trainsurfing through Hungary", Difficulty = 5 };
-            mapLogic.addMap(/*"Trainsurfing through Hungary", 5*/new Map() { MapId=5, MapName= "Trainsurfing through Hungary",Difficulty=5 });
-            Assert.That(() => mapLogic.getMapById(5).MapName == "Trainsurfing through Hungary");
+            //mapLogic.addMap(/*"Trainsurfing through Hungary", 5*/new Map() { MapId=5, MapName= "Trainsurfing through Hungary, and escaping from the guards",Difficulty=15 });
+            //Assert.That(() => mapLogic.getMapById(5).MapName == "Trainsurfing through Hungary");
+            Assert.That(() => mapLogic.addMap(new Map() { MapId = 5, MapName = "Trainsurfing through Hungary, and escaping from the guards", Difficulty = 15 }), Throws.InvalidOperationException);
+        }
+
+        [Test]
+        public void AddPlaceTest()
+        {
+            Assert.That(() => placeLogic.addPlace(new Place() { PlaceId = 5, PlaceName = "Trainsurfing through Hungary, and escaping from the guards", Country="Hungary"}), Throws.InvalidOperationException);
+        }
+
+        [Test]
+        public void AddSeasonTest()
+        {
+            Assert.That(() => seasonLogic.newSeason(new Season() { SeasonId = 5, SeasonNickname = "Trainsurfing through Hungary, and escaping from the guards", PlaceId=3 }), Throws.InvalidOperationException);
         }
 
         [SetUp]

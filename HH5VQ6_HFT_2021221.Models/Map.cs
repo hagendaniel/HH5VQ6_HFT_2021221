@@ -18,6 +18,7 @@ namespace HH5VQ6_HFT_2021221.Models
         public int MapId { get; set; }
 
         [Required]
+        [MaxLength(30)]
         public string MapName { get; set; }
         public int Difficulty { get; set; }
 
