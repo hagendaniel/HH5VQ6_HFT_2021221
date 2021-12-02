@@ -92,11 +92,8 @@ namespace HH5VQ6_HFT_2021221.Logic
                     ICollection<Player> players = playerRepository.GetAll().ToList();
 
                     Season season = seasons.Where(x => x.SeasonId == player.SeasonId).FirstOrDefault();
-                    //string toReturnCountry = places.Where(x => x.PlaceId == season.PlaceId).Select(x => x.PlaceName).FirstOrDefault();
                     Place place = places.Where(x => x.PlaceId == season.PlaceId).FirstOrDefault();
-                    //InWhichCityPlayerDied toReturn = new InWhichCityPlayerDied { PlayerId = playerId, PlaceName = place.PlaceName };
                     return place;
-                    //return toReturnCountry;
                 }
             }
             catch (PlayerNotDeadException)

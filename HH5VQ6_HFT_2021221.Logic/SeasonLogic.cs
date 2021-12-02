@@ -48,22 +48,6 @@ namespace HH5VQ6_HFT_2021221.Logic
         }
 
         //non-crud
-        //public string whichSeasonGame(string placeName) //In which season was the game hold in the given city first
-        //{
-        //    ICollection<Season> seasons = seasonRepository.GetAll().ToList();
-        //    IQueryable<Place> places = placeRepository.GetAll();
-
-        //    Place place = places.Where(x => x.PlaceName == placeName).FirstOrDefault();
-        //    place.Seasons = seasons.Where(x => x.PlaceId == place.PlaceId).ToList();
-
-        //    //int toReturn = place.PlaceId;
-        //    string toReturn = seasons.Where(x => x.PlaceId == place.PlaceId).Select(x =>x.SeasonNickname).FirstOrDefault();
-
-        //    if (place is null)
-        //        throw new InvalidPlaceException();
-        //    else
-        //        return toReturn;
-        //}
 
         public Season whichSeasonFirstGameInGivenPlace(string placeName) //In which season was the game hold in the given city first
         {
@@ -82,24 +66,6 @@ namespace HH5VQ6_HFT_2021221.Logic
                 return toReturn;
         }
 
-        //public string whichSeasonWonByGivenPlayer(int playerId)
-        //{
-        //    Player player = playerRepository.GetOne(playerId);
-        //    if (player.EliminatedOnMap_MapId != null)
-        //    {
-        //        throw new PlayerAlreadyDeadException();
-        //    }
-        //    else if (player is null)
-        //    {
-        //        throw new PlayerDoesNotExistException();
-        //    }
-        //    else
-        //    {
-        //        IQueryable<Season> seasons = seasonRepository.GetAll();
-        //        string toReturn = seasons.Where(x => x.SeasonId == player.SeasonId).Select(x => x.SeasonNickname).FirstOrDefault();
-        //        return toReturn;
-        //    }
-        //}
 
         public Season whichSeasonWonByGivenPlayer(int playerId)
         {

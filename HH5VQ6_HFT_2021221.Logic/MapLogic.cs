@@ -47,35 +47,18 @@ namespace HH5VQ6_HFT_2021221.Logic
         }
 
         //non-crud
-        //public string TheKillerMap(string seasonName) //Which map killed most of the players in the given season
-        //{
-        //    IQueryable<Season> seasons = seasonRepository.GetAll();
-        //    //IQueryable<Map> maps = mapRepository.GetAll();
-        //    Season season = seasons.Where(x => x.SeasonNickname == seasonName).FirstOrDefault();
-        //    ICollection<Player> players = playerRepository.GetAll().Where(x => x.SeasonId == season.SeasonId).ToList();
-        //    season.Players = players;
-
-        //    var groupByElimination = players.GroupBy(x => x.EliminatedOnMap_MapId);
-        //    var most = groupByElimination.OrderByDescending(x => x.Count()).Select(x => x.Key).First();//.Select(x => x.EliminatedOnMap_MapId);
-        //    //var mostPlayersKilledHereMapId = players.GroupBy(p => p.EliminatedOnMap_MapId).OrderByDescending(x => x.Count()).First();
-        //    Map toReturn = mapRepository.GetOne(Convert.ToInt32(most));
-
-        //    return toReturn.MapName;
-        //}
 
         public Map TheKillerMap(string seasonName) //Which map killed most of the players in the given season
         {
             IQueryable<Season> seasons = seasonRepository.GetAll();
-            //IQueryable<Map> maps = mapRepository.GetAll();
             Season season = seasons.Where(x => x.SeasonNickname == seasonName).FirstOrDefault();
             ICollection<Player> players = playerRepository.GetAll().Where(x => x.SeasonId == season.SeasonId).ToList();
             season.Players = players;
 
             var groupByElimination = players.GroupBy(x => x.EliminatedOnMap_MapId);
-            var most = groupByElimination.OrderByDescending(x => x.Count()).Select(x => x.Key).First();//.Select(x => x.EliminatedOnMap_MapId);
-            //var mostPlayersKilledHereMapId = players.GroupBy(p => p.EliminatedOnMap_MapId).OrderByDescending(x => x.Count()).First();
+            var most = groupByElimination.OrderByDescending(x => x.Count()).Select(x => x.Key).First();
             Map map = mapRepository.GetOne(Convert.ToInt32(most));
-            //TheKillerMap theKillerMap = new TheKillerMap { SeasonName = seasonName, MapName = map.MapName };
+
 
             return map;
         }
