@@ -96,7 +96,7 @@ namespace HH5VQ6_HFT_2021221.Client
         {
             Console.WriteLine("Name of the new map: ");
             string name = Console.ReadLine();
-            Console.WriteLine("Difficulty of the new map (1-10): ");
+            Console.WriteLine("Difficulty of the new map: ");
             int difficulty = int.Parse(Console.ReadLine());
             restService.Post(new Map
             {
