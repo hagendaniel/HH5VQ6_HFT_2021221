@@ -16,13 +16,6 @@ namespace HH5VQ6_HFT_2021221.Test
     [TestFixture]
     public class LogicTests
     {
-        //Lehet nem jók ezek a propok
-        /*public IMapRepository MapRepository { get; set; }
-        public IPlaceRepository PlaceRepository { get; set; }
-        public IPlayerRepository PlayerRepository { get; set; }
-        public ISeasonRepository SeasonRepository { get; set; }*/
-
-        ///////////////////////////////////
 
         IMapRepository mapRepository;
         IPlaceRepository placeRepository;
@@ -33,14 +26,6 @@ namespace HH5VQ6_HFT_2021221.Test
         PlaceLogic placeLogic;
         PlayerLogic playerLogic;
         SeasonLogic seasonLogic;
-
-        /*public GameDbContext Context { get; set; }*/
-
-        //[Test]
-        //public void MapsFilledTest()
-        //{
-        //    Assert.That(mapLogic.getAllMaps().Count() > 0);
-        //}
 
         //non-crud tests
 
@@ -97,13 +82,6 @@ namespace HH5VQ6_HFT_2021221.Test
             Assert.That(got.MapName == ("Red Light Green Light"));
         }
 
-        //[Test]
-        //public void ChangeSomeonesId()
-        //{
-        //    playerLogic.customId(1, 218);
-        //    Assert.That(playerLogic.getPlayerById(218), Is.Not.Null);
-        //}
-
         [Test]
         public void ChangePlayerStatus()
         {
@@ -122,9 +100,6 @@ namespace HH5VQ6_HFT_2021221.Test
         [Test]
         public void AddMapTest()
         {
-            //Map toAdd = new Map { MapId = 5, MapName = "Trainsurfing through Hungary", Difficulty = 5 };
-            //mapLogic.addMap(/*"Trainsurfing through Hungary", 5*/new Map() { MapId=5, MapName= "Trainsurfing through Hungary, and escaping from the guards",Difficulty=15 });
-            //Assert.That(() => mapLogic.getMapById(5).MapName == "Trainsurfing through Hungary");
             Assert.That(() => mapLogic.addMap(new Map() { MapId = 5, MapName = "Trainsurfing through Hungary, and escaping from the guards", Difficulty = 15 }), Throws.InvalidOperationException);
         }
 
@@ -143,15 +118,6 @@ namespace HH5VQ6_HFT_2021221.Test
         [SetUp]
         public void Setup()
         {
-            /*Mock<GameDbContext> context = new Mock<GameDbContext>();
-
-            //context.Setup()
-
-            playerLogic = new PlayerLogic(PlayerRepository, SeasonRepository);
-
-            mapRepository = new MapRepository(context.Object);
-            mapLogic = new MapLogic(MapRepository);*/
-
             List<Map> mapData =
                 new List<Map>
                 {
@@ -200,7 +166,7 @@ namespace HH5VQ6_HFT_2021221.Test
             Mock<DbSet<Player>> playerDbSetMock = new Mock<DbSet<Player>>();
             Mock<DbSet<Season>> seasonDbSetMock = new Mock<DbSet<Season>>();
 
-            mapRepository = new MapRepository(contextMock.Object);////////////////////////////////////////////////////////////////////////KIEEEEEEEEEEEEEEG
+            mapRepository = new MapRepository(contextMock.Object);
             placeRepository = new PlaceRepository(contextMock.Object);
             playerRepository = new PlayerRepository(contextMock.Object);
             seasonRepository = new SeasonRepository(contextMock.Object);
