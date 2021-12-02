@@ -28,10 +28,5 @@ namespace HH5VQ6_HFT_2021221.Models
         [NotMapped]
         [JsonIgnore]
         public virtual ICollection<Player> Players { get; set; }
-
-        /*public Season()
-        {
-            Players = new HashSet<Player>();
-        }*/
     }
 }

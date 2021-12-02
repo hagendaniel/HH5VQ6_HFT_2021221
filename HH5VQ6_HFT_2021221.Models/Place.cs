@@ -22,10 +22,5 @@ namespace HH5VQ6_HFT_2021221.Models
         [NotMapped]
         [JsonIgnore]
         public virtual ICollection<Season> Seasons { get; set; }
-
-        /*public Place()
-        {
-            Seasons = new HashSet<Season>();
-        }*/
     }
 }
